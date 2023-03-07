@@ -37,13 +37,12 @@ export function useHomeViewModel(): HomeViewModel {
       setWorkedTimeInMinutes((prevState) => prevState + workedTimeInMinutes);
     }
 
-    console.log(timeArray.length);
     if (timeArray.length > 0 && timeArray.length < 3) {
       setPreviewExitTime(
         dayjs()
           .add(8 * 60 + 13 - workedTimeInMinutes, "minutes")
           .add(1, "hour")
-          .toISOString()
+          .format('HH:mm')
       );
     }
   }, [timeArray]);
@@ -53,7 +52,7 @@ export function useHomeViewModel(): HomeViewModel {
       setExitTime(
         dayjs()
           .add(8 * 60 + 13 - workedTimeInMinutes, "minutes")
-          .toISOString()
+          .format('HH:mm')
       );
     }
   }, [workedTimeInMinutes]);
