@@ -14,25 +14,45 @@ export function useHomeViewModel(): IHomeViewModel {
   const [lunchStart, setLunchStart] = useState(-1)
   const [lunchStop, setLunchStop] = useState(-1)
 
+  const [pauseDisabled, setPauseDisabled] = useState(true)
+  const [lunchDisabled, setLunchDisabled] = useState(true)
+  const [initialDisabled, setInitialDisabled] = useState(false)
+
   const exitSeconds = initialSeconds + breakSeconds + lunchSeconds + TOTAL_WORK_SECONDS
 
   const viewModel: IHomeViewModel = {
+
     exitTime: initialSeconds === 0 ? '--' : dayjs.unix(exitSeconds).format('HH:mm'),
+
+    initialDisabled: initialDisabled,
+
+    pauseDisabled: pauseDisabled,
+    backPauseDisabled: initialSeconds === 0 || !pauseDisabled,
+
+    lunchDisabled: lunchDisabled,
+    backLunchDisabled: initialSeconds === 0 || !lunchDisabled,
 
     handleSaveCurrentTime: () => {
       setInitialSeconds(getSeconds())
+      setPauseDisabled(false)
+      setLunchDisabled(false)
+      setInitialDisabled(true)
     },
     handleStartBreak: () => {
       setBreakStart(getSeconds())
+      setPauseDisabled(true)
     },
     handleStopBreak: () => {
       setBreakStop(getSeconds())
+      setPauseDisabled(false)
     },
     handleStartLunch: () => {
       setLunchStart(getSeconds())
+      setLunchDisabled(true)
     },
     handleStopLunch: () => {
       setLunchStop(getSeconds())
+      setLunchDisabled(false)
     }
   }
 
@@ -44,8 +64,8 @@ export function useHomeViewModel(): IHomeViewModel {
 
     return () => {
       if (breakStop != -1) {
-        setBreakStop(0)
-        setBreakStart(0)
+        setBreakStop(-1)
+        setBreakStart(-1)
       }
     }
   }, [breakStop])
@@ -58,8 +78,8 @@ export function useHomeViewModel(): IHomeViewModel {
 
     return () => {
       if (lunchStop != -1) {
-        setLunchStop(0)
-        setLunchStart(0)
+        setLunchStop(-1)
+        setLunchStart(-1)
       }
     }
   }, [lunchStop])
