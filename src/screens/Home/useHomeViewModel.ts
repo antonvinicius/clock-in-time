@@ -73,7 +73,10 @@ export function useHomeViewModel(): IHomeViewModel {
   useEffect(() => {
     if (lunchStop != -1) {
       const diff = lunchStop - lunchStart
-      setLunchSeconds(diff)
+      if (diff >= 60) {
+        setLunchSeconds(diff)
+        setLunchDisabled(true)
+      }
     }
 
     return () => {
