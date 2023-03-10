@@ -1,5 +1,5 @@
 export interface IHomeViewModel {
-  exitSeconds: number
+  exitTime: string
 
   handleSaveCurrentTime: () => void
   handleStartBreak: () => void

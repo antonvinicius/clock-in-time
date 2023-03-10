@@ -14,8 +14,10 @@ export function useHomeViewModel(): IHomeViewModel {
   const [lunchStart, setLunchStart] = useState(-1)
   const [lunchStop, setLunchStop] = useState(-1)
 
+  const exitSeconds = initialSeconds + breakSeconds + lunchSeconds + TOTAL_WORK_SECONDS
+
   const viewModel: IHomeViewModel = {
-    exitSeconds: initialSeconds + breakSeconds + lunchSeconds + TOTAL_WORK_SECONDS,
+    exitTime: initialSeconds === 0 ? '--' : dayjs.unix(exitSeconds).format('HH:mm'),
 
     handleSaveCurrentTime: () => {
       setInitialSeconds(getSeconds())
@@ -62,7 +64,7 @@ export function useHomeViewModel(): IHomeViewModel {
     }
   }, [lunchStop])
 
-  console.log(dayjs.unix(viewModel.exitSeconds))
+  console.log(dayjs.unix(exitSeconds))
 
   return viewModel
 }
