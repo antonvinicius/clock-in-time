@@ -1,10 +1,8 @@
 import dayjs from 'dayjs'
 import { useState, useEffect } from 'react'
-import { getMinute as getSeconds } from '../../lib/dayjs/get-minute'
+import { TOTAL_LUNCH_MINUTES, TOTAL_WORK_SECONDS } from '../../global/config'
+import { getSeconds } from '../../lib/dayjs/get-seconds'
 import { IHomeViewModel } from './interfaces/IHomeViewModel'
-
-const TOTAL_LUNCH_MINUTES = 60 * 60
-const TOTAL_WORK_SECONDS = 480 * 60
 
 export function useHomeViewModel(): IHomeViewModel {
   const [initialSeconds, setInitialSeconds] = useState(0)
@@ -20,9 +18,7 @@ export function useHomeViewModel(): IHomeViewModel {
     exitSeconds: initialSeconds + breakSeconds + lunchSeconds + TOTAL_WORK_SECONDS,
 
     handleSaveCurrentTime: () => {
-      const currentTime = getSeconds()
-
-      setInitialSeconds(currentTime)
+      setInitialSeconds(getSeconds())
     },
     handleStartBreak: () => {
       setBreakStart(getSeconds())

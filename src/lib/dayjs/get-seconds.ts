@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-export function getMinute() {
+export function getSeconds() {
   return dayjs()
     .set('seconds', 0)
     .set('millisecond', 0)
