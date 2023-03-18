@@ -1,13 +1,13 @@
 
 import { Button, Text, TouchableOpacity, View } from "react-native";
-import { useHomeViewModel } from "./useHomeViewModel";
+import { useHomeController } from "./homeController";
 import { ClockClockwise, ClockCounterClockwise, ForkKnife, Pause, PersonSimpleWalk, Play, Stop, StopCircle, Suitcase } from "phosphor-react-native";
 import { ActionButton } from "./components/ActionButton";
 import dayjs from "dayjs";
 import { capitalize } from "../../util/capitalize";
 
 export function Home() {
-  const viewModel = useHomeViewModel()
+  const viewModel = useHomeController()
 
   return (
     <View className="flex-1 bg-zinc-700">

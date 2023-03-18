@@ -4,7 +4,7 @@ import { TOTAL_LUNCH_MINUTES, TOTAL_WORK_SECONDS } from '../../global/config'
 import { getSeconds } from '../../lib/dayjs/get-seconds'
 import { IHomeViewModel } from './interfaces/IHomeViewModel'
 
-export function useHomeViewModel(): IHomeViewModel {
+export function useHomeController(): IHomeViewModel {
   const [initialSeconds, setInitialSeconds] = useState(0)
   const [breakSeconds, setBreakSeconds] = useState(0)
   const [lunchSeconds, setLunchSeconds] = useState(TOTAL_LUNCH_MINUTES)
